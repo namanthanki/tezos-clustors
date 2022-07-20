@@ -118,24 +118,57 @@ const Clustor = () => {
         <div className="cluster-container">
             <div className="cluster-header">
                 <h2 className="cluster-title">{name}</h2>
-            {clustorStatus ? 
-                <p className="cluster-supply">{"Clustor Supply : " + totalSupply}</p>
-            : 
-                <button className="button-29" onClick={onInit}>{loading ? "Loading..." : "Initialize"}</button>
-            }
+                {clustorStatus ? 
+                    <h2 className="cluster-supply">{"Clustor Supply : " + totalSupply}</h2>
+                : 
+                    <button className="button-29" onClick={onInit}>{loading ? "Loading..." : "Initialize"}</button>
+                }
             </div>
-            <div className="lists-container">
-                <TokensList addresses={ListAddresses} />
+            <div className="columns-wrapper">
+              <div className="lists-container">
+                  <h3 className="list-header">Token List</h3>
+                  <span className="cluster-list-subtext">Small note for the users</span>
+                  <TokensList addresses={ListAddresses} />
+                  
+                  <div className="list-form">
+                    <div className="list-input">
+                      <input type="number" name="input-amount" id="input-amount" />
+                    </div>
+
+                    <div className="cluster-buttons">
+                        <button className="btn" onClick={onIssue}>{loading ? "Loading.." : "Issue"}</button>
+                        <button className="btn" onClick={onRedeem}>{loading ? "Loading.." : "Redeem"}</button>
+                        <button className="btn" onClick={onLock}>{loading ? "Loading.." : "Lock"}</button>
+                        <button className="btn" onClick={onUnlock}>{loading ? "Loading.." : "Unlock"}</button>
+                        <button className="btn" type="submit">Approve</button>
+                    </div>
+                  </div>
+              </div>
+
+              <div className="flash-loan-container">
+                <div className="flash-loan-header">
+                  <h3 className="flash-loan-title">Flash Loan</h3>
+                </div>
+
+                <div className="flash-loan-form">
+                  <label htmlFor="token-address">Token Address</label><br />
+                  <input type="text" name="token-address" id="token-address" /><br />
+                  <label htmlFor="contract-address">Contract Address</label><br />
+                  <input type="text" name="contract-address" id="contract-address" /><br />
+                  <label htmlFor="amount">Amount: </label><br />
+                  <input type="number" name="amount" id="amount" />
+                </div>
+
+                <div className="flash-loan-footer">
+                  <p className="footer-text">{"Total Locked Clustors : " + lockedClustors}</p>
+                </div>
+
+                <button className="btn execute-btn" type="submit">Execute</button>
+              </div>
             </div>
-            <div className="cluster-buttons">
-                <button className="btn" onClick={onIssue}>{loading ? "Loading.." : "Issue"}</button>
-                <button className="btn" onClick={onRedeem}>{loading ? "Loading.." : "Redeem"}</button>
-                <button className="btn" onClick={onLock}>{loading ? "Loading.." : "Lock"}</button>
-                <button className="btn" onClick={onUnlock}>{loading ? "Loading.." : "Unlock"}</button>
-            </div>
-            <div className="cluster-footer">
-                <p className="footer-text">{"Total Locked Clustors : " + lockedClustors}</p>
-            </div>
+            
+            
+            
         </div>
     );
 };
