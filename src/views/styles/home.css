@@ -1,0 +1,55 @@
+.home-root {
+    height: 93vh;
+    background: 
+        url("../../assets/bg_clusters.jpg") center no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+}
+
+.hero-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5em;
+    width: min(100% - 2rem, 60%);
+    margin-inline: auto;
+    height: 100%;
+}
+
+.hero-header {
+    margin: 0;  
+    font-weight: 700;
+    font-size: 4.656vw;
+    line-height: 80px;
+    letter-spacing: 0.095em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #deb992;
+}
+
+.hero-subtext {
+    margin: 0;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 1.4em;
+    line-height: 28px;
+    text-align: justify;
+}
+
+.lists-container {
+    height: 70vh;
+    width: min(100% - 2rem, 60%);
+    margin-inline: auto;
+}
+
+.lists-header {
+    margin: 0;  
+    font-weight: 500;
+    font-size: 2.5vw;
+    line-height: 80px;
+    letter-spacing: 0.03em;
+    text-align: center;
+    padding-right: 2rem;
+    color: #deb992;
+}
