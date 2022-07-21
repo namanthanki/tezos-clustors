@@ -10,40 +10,62 @@ export const initOperation = async (contract) => {
   }
 };
 
-export const issueOperation = async (contract) => {
+export const issueOperation = async (contract, amount) => {
   try {
     const contractInstance = await tezos.wallet.at(contract);
-    const op = await contractInstance.methods.issueToken(1).send();
+    const op = await contractInstance.methods.issueToken(amount).send();
     await op.confirmation(1);
   } catch (err) {
     throw err;
   }
 };
 
-export const redeemOperation = async (contract) => {
+export const redeemOperation = async (contract, amount) => {
   try {
     const contractInstance = await tezos.wallet.at(contract);
-    const op = await contractInstance.methods.redeemToken(1).send();
+    const op = await contractInstance.methods.redeemToken(amount).send();
     await op.confirmation(1);
   } catch (err) {
     throw err;
   }
 };
 
-export const lockOperation = async (contract) => {
+export const lockOperation = async (contract, amount) => {
   try {
     const contractInstance = await tezos.wallet.at(contract);
-    const op = await contractInstance.methods.lockClustors(1).send();
+    const op = await contractInstance.methods.lockClustors(amount).send();
     await op.confirmation(1);
   } catch (err) {
     throw err;
   }
 };
 
-export const unlockOperation = async (contract) => {
+export const unlockOperation = async (contract, amount) => {
   try {
     const contractInstance = await tezos.wallet.at(contract);
-    const op = await contractInstance.methods.unlockClustors(1).send();
+    const op = await contractInstance.methods.unlockClustors(amount).send();
+    await op.confirmation(1);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const approveOperation = async (token_contract, clustor_contract , amount) => {
+  try {
+    const contractInstance = await tezos.wallet.at(token_contract);
+    const op = await contractInstance.methods.approve(clustor_contract, amount).send();
+    await op.confirmation(1);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const flashOperation = async (contract, token_contract, flash_contract, flash_amount) => {
+  try {
+    const contractInstance = await tezos.wallet.at(contract);
+    const op = await contractInstance.methods.flashLoan(flash_contract, token_contract, flash_amount).send({
+      amount: 1000000,
+    });
     await op.confirmation(1);
   } catch (err) {
     throw err;

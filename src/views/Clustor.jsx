@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 
 
 import {fetchStorage, fetchSupply, fetchLocked} from "../utils/tzkt"
-import {initOperation, issueOperation, redeemOperation, lockOperation, unlockOperation} from "../utils/operations"
+import {initOperation, issueOperation, redeemOperation, lockOperation, unlockOperation, approveOperation} from "../utils/operations"
 
 const TokensList = lazy(() => import("../components/TokensList"));
 
@@ -21,6 +21,8 @@ const Clustor = () => {
     const [lockedClustors, setLockedClustors] = useState(0);
     const [totalSupply, setTotalSupply] = useState(0);
     const [name, setName] = useState("");
+
+    const [amount, setAmount] = useState(1);
 
     useEffect(() => {
         (async () => {
@@ -60,12 +62,12 @@ const Clustor = () => {
         setLockedClustors(Number(fstorage.lockedClustors));
         const fsupply = await fetchSupply(fstorage.clustorToken);
         setTotalSupply(fsupply);
-      };
+      }
   
     const onIssue = async () => {
         try {
           setLoading(true);
-          await issueOperation(address);
+          await issueOperation(address, amount);
           alert("Transaction succesful!");
         } catch (err) {
           alert(err.message);
@@ -73,12 +75,12 @@ const Clustor = () => {
         setLoading(false);  
         const fsupply = await fetchSupply(ctokenAddress);
         setTotalSupply(fsupply);      
-    };
+    }
 
     const onRedeem = async () => {
         try {
           setLoading(true);
-          await redeemOperation(address);
+          await redeemOperation(address, amount);
           alert("Transaction succesful!");
         } catch (err) {
           alert(err.message);
@@ -86,12 +88,12 @@ const Clustor = () => {
         setLoading(false);  
         const fsupply = await fetchSupply(ctokenAddress);
         setTotalSupply(fsupply);     
-    };   
+    }   
 
     const onLock = async () => {
         try {
           setLoading(true);
-          await lockOperation(address);
+          await lockOperation(address, amount);
           alert("Transaction succesful!");
         } catch (err) {
           alert(err.message);
@@ -99,12 +101,12 @@ const Clustor = () => {
         setLoading(false);
         const locked = await fetchLocked(address);
         setLockedClustors(locked);        
-    }; 
+    } 
 
     const onUnlock = async () => {
         try {
           setLoading(true);
-          await unlockOperation(address);
+          await unlockOperation(address, amount);
           alert("Transaction succesful!");
         } catch (err) {
           alert(err.message);
@@ -112,7 +114,23 @@ const Clustor = () => {
         setLoading(false);
         const locked = await fetchLocked(address);
         setLockedClustors(locked);        
-    };
+    }
+
+    const onApprove = async () => {
+        try {
+          setLoading(true);
+          for(const i in ListAddresses){
+                await approveOperation(ListAddresses[i].address, address , ListAddresses[i].value * amount);
+                alert("Transaction succesful!");
+           }
+        } catch (err) {
+          alert(err.message);
+        }
+        setLoading(false);
+        const locked = await fetchLocked(address);
+        setLockedClustors(locked);        
+    }
+
 
     return (
         <div className="cluster-container">
@@ -132,7 +150,7 @@ const Clustor = () => {
                   
                   <div className="list-form">
                     <div className="list-input">
-                      <input type="number" name="input-amount" id="input-amount" />
+                      <input type="number" min="1" value={amount} name="input-amount" id="input-amount" onChange={(e) => setAmount(e.target.value)} />
                     </div>
 
                     <div className="cluster-buttons">
@@ -140,7 +158,7 @@ const Clustor = () => {
                         <button className="btn" onClick={onRedeem}>{loading ? "Loading.." : "Redeem"}</button>
                         <button className="btn" onClick={onLock}>{loading ? "Loading.." : "Lock"}</button>
                         <button className="btn" onClick={onUnlock}>{loading ? "Loading.." : "Unlock"}</button>
-                        <button className="btn" type="submit">Approve</button>
+                        <button className="btn" onClick={onApprove}>{loading ? "Loading.." : "Approve"}</button>
                     </div>
                   </div>
               </div>
@@ -156,7 +174,7 @@ const Clustor = () => {
                   <label htmlFor="contract-address">Contract Address</label><br />
                   <input type="text" name="contract-address" id="contract-address" /><br />
                   <label htmlFor="amount">Amount: </label><br />
-                  <input type="number" name="amount" id="amount" />
+                  <input type="number" name="amount" id="amount"/>
                 </div>
 
                 <div className="flash-loan-footer">
