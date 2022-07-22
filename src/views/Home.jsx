@@ -33,9 +33,17 @@ const Home = () => {
   return (
     <div className="home-root">
       <div className="hero-body">
-        <h1 className="hero-header">DISCOVER CLUSTERS SLOGAN SOMETHING</h1>
+        <h1 className="hero-header">Tezos Clustors</h1>
         <p className="hero-subtext">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel consectetur libero. Proin risus arcu, ultrices a felis eget, porta tincidunt nisi. Cras et felis nisi. Etiam vel condimentum lacus. Ut a hendrerit ex, vel cursus magna. Aliquam erat volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam auctor volutpat ante. Nunc vel augue vestibulum, commodo dui sed, elementum est. In fermentum nisl vitae diam pharetra imperdiet. Etiam dapibus quam tempus lacus dapibus, vitae dictum mauris iaculis. Etiam in tortor et mauris rhoncus auctor. Cras vulputate nulla eget convallis finibus.
+            Tired of maintaining and buying different cryptos individually in your portfolio? <br/>
+            Irritated from paying gas fees for trades on each crypto individually? <br/> <br/>
+            Don't worry, Clustors is here to save you. No need to check on individual cryptos now, instead buy sectors as a whole. Let's say you are bullish on Metaverse,
+            you don't have to run around acquiring individual Metaverse tokens anymore, just a buy a Metaverse centric Clustor and you are solid. <br/><br/>
+            Using Clustors is really simple, you can issue a clustor token by paying the defined amount of tokens, now this clustor token can be traded on the DEXs across the Tezos
+            Network. You can get back your respective tokens by redeeming the clustor token, this provides you with various arbitrage opportunities across different
+            platforms. The respective tokens inside the Clustor Contract can be used as a liquidity for the Flash Loan, you can lock in your clustor tokens and enjoy the
+            rewards in XTZ that will be accumulated as fees for the flash loans. Anyone can issue a flash loan of any respective tokens of the amount less than the flash
+            amount (locked clustor tokens X amount of respective token per clustor). 
         </p>
       </div>
       <div className="lists-container">
