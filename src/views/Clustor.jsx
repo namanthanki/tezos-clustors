@@ -137,7 +137,10 @@ const Clustor = () => {
             <div className="cluster-header">
                 <h2 className="cluster-title">{name}</h2>
                 {clustorStatus ? 
+                <div className="supply-wrapper">
                     <h2 className="cluster-supply">{"Clustor Supply : " + totalSupply}</h2>
+                    <span className="cluster-list-subtext">{"Clustor Address : " + ctokenAddress}</span>
+                </div>                
                 : 
                     <button className="button-29" onClick={onInit}>{loading ? "Loading..." : "Initialize"}</button>
                 }

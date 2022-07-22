@@ -28,6 +28,11 @@
     color: #fff;
 }
 
+.supply-wrapper {
+    text-align : center;
+    padding-bottom : 2em;
+}
+
 .lists-container {
     width: 45%;
     margin-top: 1.5em;
