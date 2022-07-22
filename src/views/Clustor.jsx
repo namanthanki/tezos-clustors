@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 
 
 import {fetchStorage, fetchSupply, fetchLocked} from "../utils/tzkt"
-import {initOperation, issueOperation, redeemOperation, lockOperation, unlockOperation, approveOperation} from "../utils/operations"
+import {initOperation, issueOperation, redeemOperation, lockOperation, unlockOperation, approveOperation, flashOperation} from "../utils/operations"
 
 const TokensList = lazy(() => import("../components/TokensList"));
 
@@ -21,6 +21,10 @@ const Clustor = () => {
     const [lockedClustors, setLockedClustors] = useState(0);
     const [totalSupply, setTotalSupply] = useState(0);
     const [name, setName] = useState("");
+
+    const [flashAmount, setFlashAmount] = useState(0);
+    const [flashAddress, setFlashAddress] = useState("");
+    const [tokenFlash, setTokenFlash] = useState("");
 
     const [amount, setAmount] = useState(1);
 
@@ -131,6 +135,16 @@ const Clustor = () => {
         setLockedClustors(locked);        
     }
 
+    const onFlash = async () => {
+        try {
+          setLoading(true);
+          await flashOperation(address, tokenFlash, flashAddress, flashAmount);
+        } catch (err) {
+          alert(err.message);
+        }
+        setLoading(false);     
+    }
+
 
     return (
         <div className="cluster-container">
@@ -173,18 +187,18 @@ const Clustor = () => {
 
                 <div className="flash-loan-form">
                   <label htmlFor="token-address">Token Address</label><br />
-                  <input type="text" name="token-address" id="token-address" /><br />
+                  <input type="text" name="token-address" id="token-address" onChange={(e) => setTokenFlash(e.target.value)} /> <br />
                   <label htmlFor="contract-address">Contract Address</label><br />
-                  <input type="text" name="contract-address" id="contract-address" /><br />
+                  <input type="text" name="contract-address" id="contract-address" onChange={(e) => setFlashAddress(e.target.value)} /> <br />
                   <label htmlFor="amount">Amount: </label><br />
-                  <input type="number" name="amount" id="amount"/>
+                  <input type="number" name="flash-amount" id="flash-amount" onChange={(e) => setFlashAmount(e.target.value)} />
                 </div>
 
                 <div className="flash-loan-footer">
                   <p className="footer-text">{"Total Locked Clustors : " + lockedClustors}</p>
                 </div>
 
-                <button className="btn execute-btn" type="submit">Execute</button>
+                <button className="btn execute-btn" onClick={onFlash}>Execute</button>
               </div>
             </div>
             

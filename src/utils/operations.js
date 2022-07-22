@@ -63,8 +63,9 @@ export const approveOperation = async (token_contract, clustor_contract , amount
 export const flashOperation = async (contract, token_contract, flash_contract, flash_amount) => {
   try {
     const contractInstance = await tezos.wallet.at(contract);
-    const op = await contractInstance.methods.flashLoan(flash_contract, token_contract, flash_amount).send({
-      amount: 1000000,
+    const op = await contractInstance.methods.flashLoan(flash_amount, flash_contract, token_contract).send({
+      amount: 1,
+      mutez: false,
     });
     await op.confirmation(1);
   } catch (err) {
