@@ -162,7 +162,9 @@ const Clustor = () => {
             <div className="columns-wrapper">
               <div className="lists-container">
                   <h3 className="list-header">Token List</h3>
-                  <span className="cluster-list-subtext">Small note for the users</span>
+                  <span className="cluster-list-subtext">Please note that the token values are without the decimals, <br />
+                                                         in order to get the values in general standard - divide the values by respective token decimals.                
+                 </span>
                   <TokensList addresses={ListAddresses} />
                   
                   <div className="list-form">
@@ -170,6 +172,9 @@ const Clustor = () => {
                       <input type="number" min="1" value={amount} name="input-amount" id="input-amount" onChange={(e) => setAmount(e.target.value)} />
                     </div>
 
+                    <span className="cluster-list-subtext"> **You need to first approve the tokens for issuing new clustors.                 
+                     </span>
+    
                     <div className="cluster-buttons">
                         <button className="btn" onClick={onIssue}>{loading ? "Loading.." : "Issue"}</button>
                         <button className="btn" onClick={onRedeem}>{loading ? "Loading.." : "Redeem"}</button>
@@ -196,6 +201,11 @@ const Clustor = () => {
 
                 <div className="flash-loan-footer">
                   <p className="footer-text">{"Total Locked Clustors : " + lockedClustors}</p>
+                   <div className="lash-subtext">
+                    <span className="flash-subtext"> **Make sure that the tokens are pre-approved for the flash loan.<br />
+                                                              The entry-point of the flash loan contract should be named - "execute_operation".                 
+                     </span>
+                   </div>
                 </div>
 
                 <button className="btn execute-btn" onClick={onFlash}>Execute</button>
