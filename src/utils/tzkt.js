@@ -16,7 +16,7 @@ export const fetchClustorName = async (clustor_address) => {
 }
 
 export const fetchClustors = async () => {
-    const res = await axios.get("https://api.jakartanet.tzkt.io/v1/contracts/KT1PV1NF8a93HUcDWJqQueb9SQbLrz89Z5GV/storage");
+    const res = await axios.get("https://api.jakartanet.tzkt.io/v1/contracts/KT1G9kF5QpFw3g2MskqyD9r6kFEgvg7z6FvS/storage");
     return res.data;    
 }
 
