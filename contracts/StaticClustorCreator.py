@@ -9,6 +9,10 @@ class StaticClustorCreator(sp.Contract):
         )
         
     @sp.entry_point
+    def default(self):
+        sp.failwith("NOT ALLOWED")
+        
+    @sp.entry_point
     def createClustor(self, params):
         sp.set_type(params.tokenList, sp.TMap(sp.TAddress, sp.TNat))
         sp.set_type(params.clustorName, sp.TString)

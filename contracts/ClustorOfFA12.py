@@ -13,11 +13,15 @@ class ClustorOfFA12(sp.Contract):
             clustorName = clustorName,
             tokens = tokens,
             clustorInited = False,
-            clustorToken = sp.address("KT1L8uYmESypf5P2Ep2QqS8L4wrB4rB29nnQ"),
+            clustorToken = sp.address("tz1iCq9Fv4KXWRKiWft9cdDjcDv4YkcdeNTD"),
             lockedClustors = sp.nat(0),
             lockedBalances = sp.map(l = {}, tkey = sp.TAddress, tvalue = sp.TNat),
             lockedRewards = sp.map(l = {}, tkey = sp.TAddress, tvalue = sp.TNat)
         )
+
+    @sp.entry_point
+    def default(self):
+        sp.failwith("NOT ALLOWED")
 
     @sp.entry_point
     def initClustorToken(self):
@@ -25,10 +29,13 @@ class ClustorOfFA12(sp.Contract):
         sp.verify(self.data.clustorInited == False, message="The clustor token has already been inited")
         token_metadata = {    
             "decimals"    : "0",              
-            "name"        : "Clustor Token",
-            "symbol"      : "CST",
         }
-        token = sp.create_contract(contract = FA12.FA12(admin = sp.self_address, config = FA12.FA12_config(), token_metadata = token_metadata))
+        token = sp.create_contract(
+            contract = FA12.FA12(
+                admin = sp.self_address, 
+                config = FA12.FA12_config(), 
+                token_metadata=token_metadata)
+            )
         self.data.clustorInited = True
         self.data.clustorToken = token
 
@@ -245,7 +252,7 @@ class ClustorOfFA12(sp.Contract):
 
         c = ClustorOfFA12(sp.address("tz1iCq9Fv4KXWRKiWft9cdDjcDv4YkcdeNTD"), sp.map({sp.address("KT1L8uYmESypf5P2Ep2QqS8L4wrB4rB29nnQ") : sp.nat(100), sp.address("KT1E84As5ycCEEEn3mn6EqoKqUtxYfhC6z3j") : sp.nat(100)}), clustorName="Test-1")
         scenario += c
-#        scenario += c.initClustorToken().run(sender=admin.address)
+        scenario += c.initClustorToken().run(sender=sp.address("tz1iCq9Fv4KXWRKiWft9cdDjcDv4YkcdeNTD"))
 #        scenario.h1("Issuing the Clustor")
 
 #        scenario += t1.approve(spender=c.address, value=sp.nat(10)).run(sender=bob.address)
@@ -260,5 +267,3 @@ class ClustorOfFA12(sp.Contract):
 #        scenario += c.lockClustors(sp.nat(4)).run(sender=bob.address)
 #        scenario += c.lockClustors(sp.nat(2)).run(sender=alice)
 #        scenario += c.unlockClustors(sp.nat(1)).run(sender=alice)
-
-
