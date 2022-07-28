@@ -153,7 +153,8 @@ const Clustor = () => {
                 {clustorStatus ? 
                 <div className="supply-wrapper">
                     <h2 className="cluster-supply">{"Clustor Supply : " + totalSupply}</h2>
-                    <span className="cluster-list-subtext">{"Clustor Address : " + ctokenAddress}</span>
+                    <span className="cluster-list-subtext"><b>{"Clustor Address : " + ctokenAddress}</b></span><br/>
+                    <span className="cluster-list-subtext">Add this token address to your respective wallets</span>
                 </div>                
                 : 
                     <button className="button-29" onClick={onInit}>{loading ? "Loading..." : "Initialize"}</button>
@@ -188,6 +189,8 @@ const Clustor = () => {
               <div className="flash-loan-container">
                 <div className="flash-loan-header">
                   <h3 className="flash-loan-title">Flash Loan</h3>
+                    <span className="flash-subtext"> **Make sure that the tokens are pre-approved for the flash loan.<br />                
+                     </span>
                 </div>
 
                 <div className="flash-loan-form">
@@ -196,19 +199,18 @@ const Clustor = () => {
                   <label htmlFor="contract-address">Contract Address</label><br />
                   <input type="text" name="contract-address" id="contract-address" onChange={(e) => setFlashAddress(e.target.value)} /> <br />
                   <label htmlFor="amount">Amount: </label><br />
-                  <input type="number" name="flash-amount" id="flash-amount" onChange={(e) => setFlashAmount(e.target.value)} />
+                  <input type="number" min="1" name="flash-amount" id="flash-amount" onChange={(e) => setFlashAmount(e.target.value)} />
                 </div>
 
                 <div className="flash-loan-footer">
                   <p className="footer-text">{"Total Locked Clustors : " + lockedClustors}</p>
                    <div className="lash-subtext">
-                    <span className="flash-subtext"> **Make sure that the tokens are pre-approved for the flash loan.<br />
-                                                              The entry-point of the flash loan contract should be named - "execute_operation".                 
+                    <span className="flash-subtext"> **The entry-point of the flash loan contract should be named - "execute_operation".                 
                      </span>
                    </div>
                 </div>
 
-                <button className="btn execute-btn" onClick={onFlash}>Execute</button>
+                <button className="btn execute-btn" onClick={onFlash}>{loading ? "Loading.." : "Execute"}</button>
               </div>
             </div>
             
