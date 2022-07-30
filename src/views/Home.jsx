@@ -35,10 +35,10 @@ const Home = () => {
       <div className="hero-body">
         <h1 className="hero-header">Tezos Clustors</h1>
         <p className="hero-subtext">
-            Tired of maintaining and buying different cryptos individually in your portfolio? <br/>
-            Irritated from paying gas fees for trades on each crypto individually? <br/> <br/>
+            Tired of maintaining and buying different cryptos individually in your portfolio?
+            Irritated from paying gas fees for trades on each crypto individually?
             Don't worry, Clustors is here to save you. No need to check on individual cryptos now, instead buy sectors as a whole. Let's say you are bullish on Metaverse,
-            you don't have to run around acquiring individual Metaverse tokens anymore, just a buy a Metaverse centric Clustor and you are solid. <br/><br/>
+            you don't have to run around acquiring individual Metaverse tokens anymore, just a buy a Metaverse centric Clustor and you are solid.
             Using Clustors is really simple, you can issue a clustor token by paying the defined amount of tokens, now this clustor token can be traded on the DEXs across the Tezos
             Network. You can get back your respective tokens by redeeming the clustor token, this provides you with various arbitrage opportunities across different
             platforms. The respective tokens inside the Clustor Contract can be used as a liquidity for the Flash Loan, you can lock in your clustor tokens and enjoy the
